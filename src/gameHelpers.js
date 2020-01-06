@@ -2,7 +2,7 @@
 export const STAGE_WIDTH = 12;
 export const STAGE_HEIGHT = 20;
 
-export const createState = () =>
+export const createStage = () =>
   Array.from(
     Array(STAGE_HEIGHT),
     () => new Array(STAGE_WIDTH).fill([0, 'clear']) //0 is nothing and clear means nothing had been collided
