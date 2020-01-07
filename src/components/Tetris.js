@@ -18,7 +18,7 @@ const Tetris = () => {
     const [dropTime, setDropTime] = useState(null);//dropTime is null
     const [gameOver, setGameOver] = useState(false);//gameOver is false
 
-    const [player, updatePlayerPos, resetPlayer] = usePlayer();//player's position with tetromino
+    const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();//player's position with tetromino
     const [stage, setStage] = useStage(player, resetPlayer);//stage created?
 
     console.log('re-render');
@@ -69,6 +69,10 @@ const Tetris = () => {
             else if(keyCode === 40){// for the drop maybe for a space?
                 console.log('drop');
                 dropPlayer();
+            }
+            else if(keyCode === 38){
+              //this is changing the tetromino
+              playerRotate(stage, 1);
             }
         }
     }
