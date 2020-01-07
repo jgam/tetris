@@ -13,11 +13,11 @@ import Display from './Display';
 import StartButton from './StartButton';
 
 const Tetris = () => {
-    const [dropTime, setDropTime] = useState(null);
-    const [gameOver, setGameOver] = useState(false);
+    const [dropTime, setDropTime] = useState(null);//dropTime is null
+    const [gameOver, setGameOver] = useState(false);//gameOver is false
 
-    const [player] = usePlayer();
-    const [stage, setStage] = useStage(player);
+    const [player] = usePlayer();//player's position with tetromino
+    const [stage, setStage] = useStage(player);//stage created?
 
     console.log('re-render');
   return (
