@@ -45,19 +45,22 @@ const Tetris = () => {
     const move = ({keyCode}) => {
         if(!gameOver){
             if(keyCode === 37){//key code for the left arrow
+                console.log('left');
                 movePlayer(-1);
             }
             else if(keyCode === 39){//for the right
+                console.log('right');
                 movePlayer(1);
             }
             else if(keyCode === 40){// for the drop maybe for a space?
+                console.log('drop');
                 dropPlayer();
             }
         }
     }
 
   return (//styledTetrisWrapper is there to recognize the click movement from the screen
-    <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => movePlayer(e)}>
+    <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)}>
       <StyledTetris>
         <Stage stage={stage} />
         <aside>
