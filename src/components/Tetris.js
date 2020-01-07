@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 
+import { createStage } from '../gameHelpers';//why we need createStage? due to rendering?
+
 // styled components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
 
@@ -16,11 +18,46 @@ const Tetris = () => {
     const [dropTime, setDropTime] = useState(null);//dropTime is null
     const [gameOver, setGameOver] = useState(false);//gameOver is false
 
-    const [player] = usePlayer();//player's position with tetromino
-    const [stage, setStage] = useStage(player);//stage created?
+    const [player, updatePlayerPos, resetPlayer] = usePlayer();//player's position with tetromino
+    const [stage, setStage] = useStage(player, resetPlayer);//stage created?
 
     console.log('re-render');
-  return (
+
+    const movePlayer = dir => {
+        updatePlayerPos({x:dir, y:0});
+    }
+
+    const startGame = () => {
+        //reset everything
+        setStage(createStage());
+        resetPlayer();
+    }
+
+    const drop = () => {
+        updatePlayerPos({x:0, y:1, collided:false})
+
+    }
+
+    const dropPlayer = () => {
+        drop();
+    }
+
+    const move = ({keyCode}) => {
+        if(!gameOver){
+            if(keyCode === 37){//key code for the left arrow
+                movePlayer(-1);
+            }
+            else if(keyCode === 39){//for the right
+                movePlayer(1);
+            }
+            else if(keyCode === 40){// for the drop maybe for a space?
+                dropPlayer();
+            }
+        }
+    }
+
+  return (//styledTetrisWrapper is there to recognize the click movement from the screen
+    <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => movePlayer(e)}>
       <StyledTetris>
         <Stage stage={stage} />
         <aside>
@@ -33,9 +70,10 @@ const Tetris = () => {
             <Display text='Level' />
           </div>
             )};
-          <StartButton />
+          <StartButton onClick={startGame}/>
         </aside>
       </StyledTetris>
+    </StyledTetrisWrapper>
   );
 };
 
