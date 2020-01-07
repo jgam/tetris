@@ -22,7 +22,7 @@ const Tetris = () => {
     const [stage, setStage] = useStage(player, resetPlayer);//stage created?
 
     console.log('re-render');
-
+    //used hooks with bunch of move functions. Need to elaborate on these
     const movePlayer = dir => {
         updatePlayerPos({x:dir, y:0});
     }
