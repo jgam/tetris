@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import { createStage } from '../gameHelpers';//why we need createStage? due to rendering?
+import { createStage, checkCollision } from '../gameHelpers';//why we need createStage? due to rendering?
 
 // styled components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
@@ -24,17 +24,31 @@ const Tetris = () => {
     console.log('re-render');
     //used hooks with bunch of move functions. Need to elaborate on these
     const movePlayer = dir => {
-        updatePlayerPos({x:dir, y:0});
+        if(!checkCollision(player, stage, {x:dir, y:0})){
+          updatePlayerPos({x:dir, y:0});
+        }
     }
 
     const startGame = () => {
         //reset everything
         setStage(createStage());
         resetPlayer();
+        setGameOver(false);
     }
 
     const drop = () => {
+      if(!checkCollision(player, stage, {x:0, y:1})){
         updatePlayerPos({x:0, y:1, collided:false})
+      }
+      else{
+        //create something when game is over
+        if(player.pos.y < 1){
+          console.log("Game over!!");
+          setGameOver(true);
+          setDropTime(null);
+        }
+        updatePlayerPos({x:0, y:0, collided: true});
+      }
 
     }
 
