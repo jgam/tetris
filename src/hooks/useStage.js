@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';//useEffect is cycle method
 import {createStage} from '../gameHelpers';
 
 export const useStage = (player, resetPlayer) => {
@@ -29,6 +29,7 @@ export const useStage = (player, resetPlayer) => {
         setStage(prev => updateStage(prev));
 
     }, [player]);//here use effect is somewhat blurry?
+    //[player] is dependency array which is a standard of to use this effect hook when values regarding "player" is changed
 
     return [stage, setStage];
 }
