@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import bgImage from '../../img/bg.png';
 
+//background image taken care of
 export const StyledTetrisWrapper = styled.div`
   width: 100vw;
   height: 100vh;
@@ -10,6 +11,7 @@ export const StyledTetrisWrapper = styled.div`
   overflow: hidden;
 `;
 
+//overall tetris css, there is aside tag within this styled Tetris.
 export const StyledTetris = styled.div`
   display: flex;
   align-items: flex-start;

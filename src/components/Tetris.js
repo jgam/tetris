@@ -10,7 +10,6 @@ import StartButton from './StartButton';
 
 const Tetris = () => {
   return (
-    <StyledTetrisWrapper>
       <StyledTetris>
         <Stage stage={createStage()} />
         <aside>
@@ -22,7 +21,6 @@ const Tetris = () => {
           <StartButton />
         </aside>
       </StyledTetris>
-    </StyledTetrisWrapper>
   );
 };
 
