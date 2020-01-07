@@ -2,19 +2,19 @@ import {useState, useEffect} from 'react';
 import {createStage} from '../gameHelpers';
 
 export const useStage = (player, resetPlayer) => {
-    const [stage, setStage] = useState(createStage());
+    const [stage, setStage] = useState(createStage());//setStage creates default stage
 
     useEffect(() => {
         const updateStage = prevStage => {
-            //First flush the stage
+            //First copy the stage
             const newStage = prevStage.map(row =>
-                row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)),
+                row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)),//in here, if the cell is already marked with other tetrimonios, then leave it as it is.
             );
 
             //Then draw the tetromino
             player.tetromino.forEach((row, y) => {
                 row.forEach((value, x) => {
-                    if(value !== 0){
+                    if(value !== 0){//here if value is not 0, then color it with tetrimonios
                         newStage[y + player.pos.y][x+player.pos.x] = [
                             value,
                             `${player.collided ? 'merged' : 'clear'}`,
@@ -28,7 +28,7 @@ export const useStage = (player, resetPlayer) => {
 
         setStage(prev => updateStage(prev));
 
-    }, [player]);
+    }, [player]);//here use effect is somewhat blurry?
 
     return [stage, setStage];
 }

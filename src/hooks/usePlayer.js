@@ -30,5 +30,5 @@ export const usePlayer = () => {
 
 
 
-    return [player, updatePlayerPos, resetPlayer];//returns player, position, reset position
+    return [player, updatePlayerPos, resetPlayer];//returns player, position, reset position as a function so we can use them
 }
